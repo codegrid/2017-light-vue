@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>ルートコンポーネントを用意する</title>
+</head>
+<body>
+
+<div class="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+  template: '<div>hello!</div>',
+
+} );
+
+componentRoot.$mount( '.MyAppRoot' );
+
+
+</script>
+
+</body>
+</html>

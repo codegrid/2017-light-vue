@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>属性を渡す作る</title>
+</head>
+<body>
+
+<div class="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.js"></script>
+<script>
+var AbsoluteNumber = Vue.extend( {
+
+  props: {
+    value: {
+      type: Number,
+      default: 0
+    }
+  },
+
+  template:
+  '<div>{{ Math.abs( value ) }}</div>'
+} );
+
+var componentRoot = new Vue( {
+
+  template:
+  '<div>' +
+    '<absolute-number :value="100"></absolute-number>' +
+    '<absolute-number :value="-50"></absolute-number>' +
+    'hello!' +
+  '</div>',
+
+  components: {
+    AbsoluteNumber: AbsoluteNumber
+  }
+
+} );
+
+componentRoot.$mount( '.MyAppRoot' );
+
+
+</script>
+
+</body>
+</html>
