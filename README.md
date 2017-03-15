@@ -1,6 +1,6 @@
 # ライトに使うVue.js
 
-[CodeGrid](http://www.codegrid.net/)の「ライトに使うVue.js」の記事内で使用しているサンプルです。
+[CodeGrid](http://www.codegrid.net/)の「[ライトに使うVue.js](https://app.codegrid.net/series/2017-light-vue)」の記事内で使用しているサンプルです。
 
 各サンプルの解説については上記記事をご確認ください。
 
