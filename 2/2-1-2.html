@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title></title>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+	data: function () {
+
+		return {
+
+			answer: null
+
+		}
+
+	},
+
+	template:
+		'<div>' +
+			'<button type="button" @click="alert( 1 )">O</button>' +
+			'<button type="button" @click="alert( 2 )">X</button>' +
+		'</div>'
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+</script>
+
+</body>
+</html>
