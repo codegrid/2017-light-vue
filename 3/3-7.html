@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title></title>
+<style>
+.TeaItem{
+  border: 1px solid #000;
+  margin: 10px 0;
+}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var TeaItem = Vue.extend( {
+
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    imgSrc: {
+      type: String,
+      default: ''
+    }
+  },
+
+  template:
+    '<div class="TeaItem">' +
+      '<img :src="imgSrc">' +
+      '<div>{{ name }}</div>' +
+    '</div>'
+} );
+
+var componentRoot = new Vue( {
+
+  data: function () {
+
+    return {
+
+      selectList: []
+
+    }
+
+  },
+
+  computed: {
+    noSelected: function () {
+
+      if ( this.$data.selectList.length === 0 ) {
+
+        return true;
+
+      } else {
+
+        return false;
+
+      };
+
+    }
+  },
+
+  template:
+    '<div>' +
+      '<button @click="toggleType( \'blacktea\' )">' +
+        '<template v-if="includes( \'blacktea\' ) ">&#10004;</template>' +
+        '紅茶' +
+      '</button>' +
+      '<button @click="toggleType( \'greentea\' )">' +
+        '<template v-if="includes( \'greentea\' ) ">&#10004;</template>' +
+        '緑茶' +
+      '</button>' +
+      '<button @click="toggleType( \'smokytea\' )">' +
+        '<template v-if="includes( \'smokytea\' ) ">&#10004;</template>' +
+        '燻製茶' +
+      '</button>' +
+
+      '<template v-if="noSelected">' +
+        '<p>絞り込みが可能です。</p>' +
+      '</template>' +
+      '<template v-else>' +
+        '<p>{{ selectList }}を選択中</p>' +
+      '</template>' +
+
+
+      '<tea-item name="イングリッシュ ブレックファースト" imgSrc="EnglishBreakFast.png">' +
+      '</tea-item>' +
+
+      '<tea-item name="シルバームーン" imgSrc="SilverMoon.png">' +
+      '</tea-item>' +
+
+      '<tea-item name="トーキョー シンガポール" imgSrc="TokyoSingapore.png">' +
+      '</tea-item>' +
+
+      '<tea-item name="スモーキー アールグレイ" imgSrc="SmokyEarlGrey.png">' +
+      '</tea-item>' +
+
+    '</div>',
+
+  methods: {
+
+    // 選択状態をトグルする。
+    // type が $data.selectList に...
+    // - 含まれていなければ追加
+    // - 含まれてれば削除
+    toggleType: function ( type ) {
+
+      // 同一コンポーネント内のmethodsに定義した、別のメソッドを呼び出し可能。
+      var isSelected = this.includes( type );
+
+      // 配列内に「type」がなければ、追加する
+      if ( ! isSelected ) {
+
+        this.$data.selectList.push( type );
+
+      } else {
+
+        // 配列内にもし「type」があったら、取り除く。
+        // 配列から指定の要素を取り除いた、新しい別の配列「filtered」をつくる
+        var filtered = this.$data.selectList.filter( function( el ) {
+          return el !== type;
+        } );
+        this.$data.selectList = filtered;
+
+      }
+
+    },
+
+    // 選択している内容にtypeが含まれていればtrueを返す
+    includes: function ( type ) {
+
+      // this.$data.selectListは配列なので、indexOfで含まれているか否かが判定可能
+      return this.$data.selectList.indexOf( type ) !== -1;
+
+    }
+
+  },
+
+  components: {
+    TeaItem: TeaItem
+  }
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+
+
+</script>
+
+</body>
+</html>

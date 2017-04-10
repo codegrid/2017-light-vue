@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title></title>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+
+var componentRoot = new Vue( {
+
+  data: function () {
+
+    return {
+
+      selectList: []
+
+    }
+
+  },
+
+  template:
+    '<div>' +
+      '<button>' +
+        '紅茶' +
+      '</button>' +
+      '<button>' +
+        '緑茶' +
+      '</button>' +
+      '<button>' +
+        '燻製茶' +
+      '</button>' +
+
+      '{{ selectList }}' +
+
+    '</div>'
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+</script>
+
+</body>
+</html>
