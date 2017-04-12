@@ -24,7 +24,7 @@ var componentRoot = new Vue( {
 
     return {
 
-      electedItemList: []
+      selectedItemList: []
 
     }
 
@@ -42,14 +42,14 @@ var componentRoot = new Vue( {
         '燻製茶' +
       '</button>' +
 
-      '{{ electedItemList }}' +
+      '{{ selectedItemList }}' +
 
     '</div>',
 
   methods: {
 
     // 選択状態をトグルする。
-    // type が $data.electedItemList に...
+    // type が $data.selectedItemList に...
     // - 含まれていなければ追加
     // - 含まれてれば削除
     toggleSelected: function ( type ) {
@@ -60,16 +60,16 @@ var componentRoot = new Vue( {
       // 配列内に「type」がなければ、追加する
       if ( ! isSelected ) {
 
-        this.$data.electedItemList.push( type );
+        this.$data.selectedItemList.push( type );
 
       } else {
 
         // 配列内にもし「type」があったら、取り除く。
         // 配列から指定の要素を取り除いた、新しい別の配列「filtered」をつくる
-        var filtered = this.$data.electedItemList.filter( function( el ) {
+        var filtered = this.$data.selectedItemList.filter( function( el ) {
           return el !== type;
         } );
-        this.$data.electedItemList = filtered;
+        this.$data.selectedItemList = filtered;
 
       }
 
@@ -78,8 +78,8 @@ var componentRoot = new Vue( {
     // 選択している内容にtypeが含まれていればtrueを返す
     includes: function ( type ) {
 
-      // this.$data.electedItemListは配列なので、indexOfで含まれているか否かが判定可能
-      return this.$data.electedItemList.indexOf( type ) !== -1;
+      // this.$data.selectedItemListは配列なので、indexOfで含まれているか否かが判定可能
+      return this.$data.selectedItemList.indexOf( type ) !== -1;
 
     }
 
