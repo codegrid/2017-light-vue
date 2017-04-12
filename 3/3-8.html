@@ -43,7 +43,7 @@ var componentRoot = new Vue( {
 
     return {
 
-      selectList: []
+      electedItemList: []
 
     }
 
@@ -52,7 +52,7 @@ var componentRoot = new Vue( {
   computed: {
     noSelected: function () {
 
-      if ( this.$data.selectList.length === 0 ) {
+      if ( this.$data.electedItemList.length === 0 ) {
 
         return true;
 
@@ -67,15 +67,15 @@ var componentRoot = new Vue( {
 
   template:
     '<div>' +
-      '<button @click="toggleType( \'blacktea\' )">' +
+      '<button @click="toggleSelected( \'blacktea\' )">' +
         '<template v-if="includes( \'blacktea\' ) ">&#10004;</template>' +
         '紅茶' +
       '</button>' +
-      '<button @click="toggleType( \'greentea\' )">' +
+      '<button @click="toggleSelected( \'greentea\' )">' +
         '<template v-if="includes( \'greentea\' ) ">&#10004;</template>' +
         '緑茶' +
       '</button>' +
-      '<button @click="toggleType( \'smokytea\' )">' +
+      '<button @click="toggleSelected( \'smokytea\' )">' +
         '<template v-if="includes( \'smokytea\' ) ">&#10004;</template>' +
         '燻製茶' +
       '</button>' +
@@ -84,7 +84,7 @@ var componentRoot = new Vue( {
         '<p>絞り込みが可能です。</p>' +
       '</template>' +
       '<template v-else>' +
-        '<p>{{ selectList }}を選択中</p>' +
+        '<p>{{ electedItemList }}を選択中</p>' +
       '</template>' +
 
 
@@ -113,10 +113,10 @@ var componentRoot = new Vue( {
   methods: {
 
     // 選択状態をトグルする。
-    // type が $data.selectList に...
+    // type が $data.electedItemList に...
     // - 含まれていなければ追加
     // - 含まれてれば削除
-    toggleType: function ( type ) {
+    toggleSelected: function ( type ) {
 
       // 同一コンポーネント内のmethodsに定義した、別のメソッドを呼び出し可能。
       var isSelected = this.includes( type );
@@ -124,16 +124,16 @@ var componentRoot = new Vue( {
       // 配列内に「type」がなければ、追加する
       if ( ! isSelected ) {
 
-        this.$data.selectList.push( type );
+        this.$data.electedItemList.push( type );
 
       } else {
 
         // 配列内にもし「type」があったら、取り除く。
         // 配列から指定の要素を取り除いた、新しい別の配列「filtered」をつくる
-        var filtered = this.$data.selectList.filter( function( el ) {
+        var filtered = this.$data.electedItemList.filter( function( el ) {
           return el !== type;
         } );
-        this.$data.selectList = filtered;
+        this.$data.electedItemList = filtered;
 
       }
 
@@ -142,8 +142,8 @@ var componentRoot = new Vue( {
     // 選択している内容にtypeが含まれていればtrueを返す
     includes: function ( type ) {
 
-      // this.$data.selectListは配列なので、indexOfで含まれているか否かが判定可能
-      return this.$data.selectList.indexOf( type ) !== -1;
+      // this.$data.electedItemListは配列なので、indexOfで含まれているか否かが判定可能
+      return this.$data.electedItemList.indexOf( type ) !== -1;
 
     },
 
@@ -152,11 +152,11 @@ var componentRoot = new Vue( {
 
       var matched = true;
 
-      // this.$data.selectList も、引数の types も配列であるため、
+      // this.$data.electedItemList も、引数の types も配列であるため、
       // 比較するには二重のループが必要。
       // 外側はforEachループで全要素を判定、その中はsomeループを利用で最小限の走査
       // ループ中に一度でも不一致と判定されると matched に false が格納される。
-      this.$data.selectList.forEach( function ( selected ) {
+      this.$data.electedItemList.forEach( function ( selected ) {
 
         var found = types.some( function ( type ) { return type === selected; } );
         if ( ! found ) { matched = false; }
