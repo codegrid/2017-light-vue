@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>MyButton</title>
+<style>
+.MyButton {
+  color: #fff;
+  text-align: center;
+  min-width: 200px;
+  padding: 10px;
+  border: none;
+  background: #37474f;
+  transition: all .3s;
+}
+.MyButton:hover,
+.MyButton:focus {
+  background-color: #367798;
+}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+  template:
+    '<div>' +
+      '<button class="MyButton" type="button">button</button>' +
+    '</div>',
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+
+
+</script>
+
+</body>
+</html>

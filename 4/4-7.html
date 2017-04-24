@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Animation</title>
+<style>
+.Panel{
+  transition: all 2s;
+}
+.Panel.v-enter{
+  opacity: 0;
+}
+.Panel.v-enter-to{
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+  data: function () {
+    return {
+      show: false
+    }
+  },
+
+  template:
+    '<div>' +
+      '<button type="button" @click="toggle">切り替え</button>' +
+
+      '<transition>' +
+        '<div class="Panel" v-if="show">' +
+          '<img src="img_01.svg" alt="">' +
+        '</div>' +
+      '</transition>' +
+    '</div>',
+
+  methods: {
+    toggle: function () {
+      this.show = !this.show;
+    }
+  }
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+</script>
+
+</body>
+</html>

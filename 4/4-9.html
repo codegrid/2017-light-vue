@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Animation</title>
+<style>
+.Panel{
+  display: table;
+}
+.Panel.v-enter{
+  transform: scale( 0 );
+}
+.Panel.v-enter-to{
+  transform: scale( 1 );
+}
+.Panel.v-enter-active{
+  transition: all .5s cubic-bezier( .7, 2, .3, 1 );
+}
+.Panel.v-leave{
+  opacity: 1;
+}
+.Panel.v-leave-to{
+  opacity: 0;
+}
+.Panel.v-leave-active{
+  transition: all .5s;
+  transform: translateY( 30px ) rotate( 20deg );
+}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+  data: function () {
+    return {
+      show: false
+    }
+  },
+
+  template:
+    '<div>' +
+      '<button type="button" @click="toggle">切り替え</button>' +
+
+      '<transition>' +
+        '<div class="Panel" v-if="show">' +
+          '<img src="img_01.svg" alt="">' +
+        '</div>' +
+      '</transition>' +
+    '</div>',
+
+  methods: {
+    toggle: function () {
+      this.show = !this.show;
+    }
+  }
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+</script>
+
+</body>
+</html>

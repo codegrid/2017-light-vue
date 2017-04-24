@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Animation</title>
+<style>
+.Panel{
+  display: table;
+  opacity: 0.3;
+  transition: all .5s;
+}
+.Panel.cssActive{
+  opacity: 1;
+  transform: scale( 1.2 );
+}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+  data: function () {
+    return {
+      active: false
+    }
+  },
+
+  template:
+    '<div>' +
+      '<button type="button" @click="toggle">切り替え</button>' +
+      '{{ active }}' +
+
+      '<div class="Panel">' +
+        '<img src="img_01.svg" alt="">' +
+      '</div>' +
+    '</div>',
+
+  methods: {
+    toggle: function () {
+      this.active = !this.active;
+    }
+  }
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+</script>
+
+</body>
+</html>

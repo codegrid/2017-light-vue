@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Animation</title>
+<style>
+.Panel{
+  width: 128px;
+}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var componentRoot = new Vue( {
+
+  data: function () {
+    return {
+      show: false
+    }
+  },
+
+  template:
+    '<div>' +
+      '<button type="button" @click="toggle">切り替え</button>' +
+
+      '<transition' +
+      '  v-on:before-enter="beforeEnter"' +
+      '  v-on:enter="enter"' +
+      '  v-on:before-leave="beforeLeave"' +
+      '  v-on:leave="leave"' +
+      '>' +
+        '<div class="Panel" v-if="show">' +
+          '文字量で変わるブロック文字量で変わるブロック文字量で変わるブロック文字量で変わるブロック' +
+        '</div>' +
+      '</transition>' +
+    '</div>',
+
+  methods: {
+    toggle: function () {
+      this.show = !this.show;
+    },
+    beforeEnter: function (el) {
+      $( el ).hide();
+    },
+    enter: function (el, done) {
+      $( el ).slideDown( done );
+    },
+    beforeLeave: function (el) {
+      //do nothing
+    },
+    leave: function (el, done) {
+      $( el ).slideUp( done );
+    }
+  }
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+</script>
+
+</body>
+</html>

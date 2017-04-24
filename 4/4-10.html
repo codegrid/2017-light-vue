@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Animation</title>
+<style>
+.Panel{
+  display: table;
+  transition: all 1s;
+}
+.Panel.v-enter   {opacity: 0;}
+.Panel.v-enter-to{opacity: 1;}
+.Panel.v-leave   {opacity: 1;}
+.Panel.v-leave-to{opacity: 0;}
+</style>
+</head>
+<body>
+
+<div id="MyAppRoot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
+<script>
+var Panel1 = Vue.extend( {
+  template:
+    '<div class="Panel">' +
+      '<img src="img_01.svg" alt="">' +
+    '</div>'
+} );
+var Panel2 = Vue.extend( {
+  template:
+    '<div class="Panel">' +
+      '<img src="img_02.svg" alt="">' +
+    '</div>'
+} );
+
+var componentRoot = new Vue( {
+
+  data: function () {
+    return {
+      show: false
+    }
+  },
+
+  template:
+    '<div>' +
+      '<button type="button" @click="toggle">切り替え</button>' +
+      '<transition>' +
+        '<panel1 v-if="show"></panel1>' +
+        '<panel2 v-if="!show"></panel2>' +
+      '</transition>' +
+    '</div>',
+
+  methods: {
+
+    toggle: function () {
+      this.show = !this.show;
+    }
+
+  },
+
+  components: {
+    Panel1: Panel1,
+    Panel2: Panel2
+  }
+
+} );
+
+componentRoot.$mount( '#MyAppRoot' );
+
+
+</script>
+
+</body>
+</html>
